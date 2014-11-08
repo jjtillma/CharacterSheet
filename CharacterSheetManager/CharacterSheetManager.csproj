@@ -67,6 +67,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Ability.cs" />
+    <Compile Include="Models\BasicCharacteristics.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\ProtectiveItem.cs" />
+    <Compile Include="Models\SavingThrow.cs" />
+    <Compile Include="Models\Skill.cs" />
+    <Compile Include="Models\Weapon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -92,6 +99,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
