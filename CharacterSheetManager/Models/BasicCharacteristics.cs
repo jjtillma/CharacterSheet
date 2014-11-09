@@ -6,41 +6,59 @@ using System.Threading.Tasks;
 
 namespace CharacterSheetManager.Models
 {
-    public class BasicCharacteristics
+    public static class BasicCharacteristics
     {
+        public static Dictionary<string, Ability> Abilities;
+        public static Dictionary<string, Skill> Skills;
+        public static Dictionary<string, SavingThrow> SavingThrows;
+        public static Dictionary<string, Dictionary<string, ushort>> BaseSaves;
 
-        private byte _spellResistance;
-        public byte SpellResistance
+        private static short _spellResistance;
+        public static short SpellResistance
         {
             set { _spellResistance = value; }
             get { return _spellResistance; }
         }
 
-        private byte _sizeModifier;
-        public byte SizeModifier
+        private static short _sizeModifier;
+        public static short SizeModifier
         {
             set { _sizeModifier = value; }
             get { return _sizeModifier; }
         }
 
-        private byte _grappleBonus;
-        public byte GrappleBonus
+        private static short _grappleBonus;
+        public static short GrappleBonus
         {
             set { _grappleBonus = value; }
             get { return _grappleBonus; }
         }
-        private byte _grappleModifier;
-        public byte GrappleModifier
+        private static short _grappleModifier;
+        public static short GrappleModifier
         {
             set { _grappleModifier = value; }
-            get { return (byte)(_grappleModifier + _sizeModifier + _grappleBonus); }
+            get { return (short)(_grappleModifier + _sizeModifier + _grappleBonus); }
         }
 
-        private byte _baseAttackBonus;
-        public byte BaseAttackBonus
+        private static short _baseAttackBonus;
+        public static short BaseAttackBonus
         {
             set { _baseAttackBonus = value; }
             get { return _baseAttackBonus; }
+        }
+
+        private static short _level;
+        public static short Level
+        {
+            set { _level = value; }
+            get { return _level; }
+        }
+
+        private static string _class;
+        public static string Class
+        {
+            set { _class = value; }
+            get { return _class; }
         }
     }
 }

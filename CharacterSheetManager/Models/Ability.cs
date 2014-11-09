@@ -6,37 +6,52 @@ using System.Threading.Tasks;
 
 namespace CharacterSheetManager.Models
 {
-    class Ability
+    public class Ability : ModelBase
     {
-        private byte _score;
-        public byte Score
+        Ability(string name)
+        {
+            if(name == null)
+            {
+                throw new InvalidOperationException();
+            }
+            _name = name;
+        }
+
+        private readonly string _name = string.Empty;
+        public string Name
+        {
+            get { return _name; }
+        }
+
+        private short _score;
+        public short Score
         {
             set { _score = value; }
             get { return _score; }
         }
 
-        private byte _modifier;
-        public byte Score
+        private short _modifier;
+        public short Modifier
         {
             set { _modifier = value; }
             get { return _modifier; }
         }
-        private byte _bonus;
-        public byte Score
+        private short _bonus;
+        public short Bonus
         {
             set { _bonus = value; }
             get { return _bonus; }
         }
-        private byte _temporaryModifier;
 
-        public byte TemporaryModifier
+        private short _temporaryModifier;
+        public short TemporaryModifier
         {
             set { _temporaryModifier = value; }
             get { return _temporaryModifier; }
         }
 
-        private byte _temporaryScore;
-        public byte TemporaryScore
+        private short _temporaryScore;
+        public short TemporaryScore
         {
             set { _temporaryScore = value; }
             get { return _temporaryScore; }
