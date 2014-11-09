@@ -8,6 +8,15 @@ namespace CharacterSheetManager.Models
 {
     public class SavingThrow : ModelBase
     {
+        public SavingThrow()
+        {
+            if(baseCharacteristics == null)
+            {
+                baseCharacteristics = new BasicCharacteristics();
+            }
+        }
+        private static BasicCharacteristics baseCharacteristics;
+
         SavingThrow(string name)
         {
             if (string.IsNullOrEmpty(name) == true)
@@ -38,17 +47,17 @@ namespace CharacterSheetManager.Models
                 {
                     case ConstantResources.SavingThrows.FORTITUDE:
                     {
-                        temp = BasicCharacteristics.Abilities[ConstantResources.Abilities.CONSTITUTION].Modifier;
+                        temp = baseCharacteristics.Abilities[ConstantResources.Abilities.CONSTITUTION].Modifier;
                         break;
                     }
                     case ConstantResources.SavingThrows.REFLEX:
                     {
-                        temp = BasicCharacteristics.Abilities[ConstantResources.Abilities.DEXTERITY].Modifier;
+                        temp = baseCharacteristics.Abilities[ConstantResources.Abilities.DEXTERITY].Modifier;
                         break;
                     }
                     case ConstantResources.SavingThrows.WILL:
                     {
-                        temp = BasicCharacteristics.Abilities[ConstantResources.Abilities.WISDOM].Modifier;
+                        temp = baseCharacteristics.Abilities[ConstantResources.Abilities.WISDOM].Modifier;
                         break;
                     }
                 }
@@ -69,10 +78,10 @@ namespace CharacterSheetManager.Models
             get { return _temporaryBonus; }
         }
 
-        public ushort _baseSave;
-        public ushort BaseSave
+        public short _baseSave;
+        public short BaseSave
         {
-            get{ return BasicCharacteristics.BaseSaves[BasicCharacteristics.Class][_name]; }
+            get { return baseCharacteristics.SavingThrows[_name].Total; }
         }
     }
 }

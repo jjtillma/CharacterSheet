@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Models\Ability.cs" />
     <Compile Include="Models\BasicCharacteristics.cs" />
+    <Compile Include="Models\ClassAndRaceTraits.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\ProtectiveItem.cs" />
