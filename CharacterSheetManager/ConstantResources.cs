@@ -111,7 +111,8 @@ namespace CharacterSheetManager
             public const string MEDIUM = "Medium";
             public const string HEAVY = "Heavy";
             public const string LIFT_OVER_HEAD = "Lift Over Head";
-            public const string PUSH_DRAG_OR_PULL = " Push, Drag, or Pull";
+            public const string LIFT_OFF_GROUND = "Lift Off Ground";
+            public const string PUSH_OR_DRAG = " Push or Drag";
         }
     }
 }
