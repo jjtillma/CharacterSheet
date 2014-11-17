@@ -8,25 +8,20 @@ namespace CharacterSheetManager.Models
 {
     public class SavingThrow : ModelBase
     {
-        public SavingThrow()
-        {
-            if(baseCharacteristics == null)
-            {
-                baseCharacteristics = new BasicCharacteristics();
-            }
-        }
-        private static BasicCharacteristics baseCharacteristics;
-
-        SavingThrow(string name)
-        {
-            if (string.IsNullOrEmpty(name) == true)
-            {
-                throw new InvalidOperationException("Invalid Save Name");
-            }
-            _name = name;
-        }
-
         private readonly string _name = string.Empty;
+        private readonly string _class = string.Empty;
+        private readonly string _race = string.Empty;
+        private readonly ClassAndRaceTraits _traits;
+        private readonly Dictionary<string, Ability> _abilities;
+        public SavingThrow(string name, string charClass, string race, Dictionary<string, Ability> abilities, ClassAndRaceTraits traits)
+        {
+            _abilities = abilities;
+            _name = name;
+            _class = charClass;
+            _race = race;
+            _traits = traits;
+        }
+        
         public string Name
         {
             get { return _name; }
@@ -35,7 +30,7 @@ namespace CharacterSheetManager.Models
         public short _total;
         public short Total
         {
-            get { return (short)(AbilityModifier + BaseSave + MiscellaneousBonus + TemporaryBonus); }
+            get { return (short)(AbilityModifier + BaseSave + MiscellaneousBonus + TemporaryBonus + ClassBonus + RaceBonus); }
         }
 
         public short AbilityModifier
@@ -47,17 +42,17 @@ namespace CharacterSheetManager.Models
                 {
                     case ConstantResources.SavingThrows.FORTITUDE:
                     {
-                        temp = baseCharacteristics.Abilities[ConstantResources.Abilities.CONSTITUTION].Modifier;
+                        temp = _abilities[ConstantResources.Abilities.CONSTITUTION].Modifier;
                         break;
                     }
                     case ConstantResources.SavingThrows.REFLEX:
                     {
-                        temp = baseCharacteristics.Abilities[ConstantResources.Abilities.DEXTERITY].Modifier;
+                        temp = _abilities[ConstantResources.Abilities.DEXTERITY].Modifier;
                         break;
                     }
                     case ConstantResources.SavingThrows.WILL:
                     {
-                        temp = baseCharacteristics.Abilities[ConstantResources.Abilities.WISDOM].Modifier;
+                        temp = _abilities[ConstantResources.Abilities.WISDOM].Modifier;
                         break;
                     }
                 }
@@ -78,10 +73,25 @@ namespace CharacterSheetManager.Models
             get { return _temporaryBonus; }
         }
 
-        public short _baseSave;
-        public short BaseSave
+        public ushort BaseSave
         {
-            get { return baseCharacteristics.SavingThrows[_name].Total; }
+            get { return 0; }
+        }
+
+        public short ClassBonus
+        { 
+            get
+            {
+                return _traits.SaveBonuses.ContainsKey(_class) ? _traits.SaveBonuses[_class] : (short)0;
+            }
+        }
+
+        public short RaceBonus
+        { 
+            get
+            {
+                return _traits.SaveBonuses.ContainsKey(_race) ? _traits.SaveBonuses[_race] : (short)0;
+            }
         }
     }
 }

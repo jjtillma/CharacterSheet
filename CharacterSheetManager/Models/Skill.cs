@@ -8,16 +8,19 @@ namespace CharacterSheetManager.Models
 {
     public class Skill : ModelBase
     {
-        Skill(string name)
-        {
-            if(string.IsNullOrEmpty(name) == true)
-            {
-                throw new InvalidOperationException();
-            }
-            _name = name;
-        }
-
         private readonly string _name = string.Empty;
+        private readonly string _class = string.Empty;
+        private readonly string _race = string.Empty;
+        private readonly ClassAndRaceTraits _traits;
+        private readonly Dictionary<string, Ability> _abilities;
+        public Skill(string name, string charClass, string race, Dictionary<string, Ability> abilities, ClassAndRaceTraits traits)
+        {
+            _abilities = abilities;
+            _name = name;
+            _class = charClass;
+            _race = race;
+            _traits = traits;
+        }
         public string Name
         {
             get { return _name; }
@@ -42,17 +45,15 @@ namespace CharacterSheetManager.Models
         }
         
         //this will be table look up
-        private short _classBonus;
         public short ClassBonus
         {
-            get { return _classBonus; }
+            get { return _traits.SkillBonuses.ContainsKey(_class) ? _traits.SkillBonuses[_class] : (short)0; }
         }
 
         //this will be table look up
-        private short _racialBonus;
         public short RacialBonus
         {
-            get { return _racialBonus; }
+            get { return _traits.SkillBonuses.ContainsKey(_class) ? _traits.SkillBonuses[_class] : (short)0; }
         }
 
         //this will be table look up
@@ -77,10 +78,9 @@ namespace CharacterSheetManager.Models
         }
 
         //this will be table look up
-        private bool _isClassSkill;
         public bool IsClassSkill
         {
-            get { return _isClassSkill; }
+            get { return _traits.ClassSkills[_name]; }
         }
 
         //this will be table look up
@@ -90,6 +90,5 @@ namespace CharacterSheetManager.Models
             set { _isTrainedOnly = value; }
             get { return _isTrainedOnly; }
         }
-
     }
 }

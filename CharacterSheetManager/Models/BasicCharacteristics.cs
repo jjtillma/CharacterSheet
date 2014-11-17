@@ -16,7 +16,7 @@ namespace CharacterSheetManager.Models
         public  Dictionary<string, Ability> Abilities;
         public  Dictionary<string, Skill> Skills;
         public  Dictionary<string, SavingThrow> SavingThrows;
-        public  Dictionary<string, Dictionary<string, ClassAndRaceTraits>> ClassAndRaceFeatures;
+        public  ClassAndRaceTraits ClassAndRaceFeatures;
 
         private short _spellResistance;
         public short SpellResistance

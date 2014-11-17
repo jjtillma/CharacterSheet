@@ -8,16 +8,20 @@ namespace CharacterSheetManager.Models
 {
     public class Ability : ModelBase
     {
-        Ability(string name)
+        private readonly string _name = string.Empty;
+        private readonly string _class = string.Empty;
+        private readonly string _race = string.Empty;
+        private readonly ClassAndRaceTraits _traits;
+        private readonly Dictionary<string, Ability> _abilities;
+        public Ability(string name, string charClass, string race, Dictionary<string, Ability> abilities, ClassAndRaceTraits traits)
         {
-            if(name == null)
-            {
-                throw new InvalidOperationException();
-            }
+            _abilities = abilities;
             _name = name;
+            _class = charClass;
+            _race = race;
+            _traits = traits;
         }
 
-        private readonly string _name = string.Empty;
         public string Name
         {
             get { return _name; }
@@ -30,11 +34,27 @@ namespace CharacterSheetManager.Models
             get { return _score; }
         }
 
-        private short _modifier;
+        public short Total
+        {
+            get { return (short)(Modifier + Bonus + TemporaryModifier + ClassBonus + RaceBonus); }
+        }
+
         public short Modifier
         {
-            set { _modifier = value; }
-            get { return _modifier; }
+            get
+            {
+                short toReturn;
+
+                if(TemporaryScore != 0 && TemporaryScore != Score)
+                {
+                    toReturn = (short)(Math.Floor((double)(TemporaryScore / 2)) - 5);
+                }
+                else
+                {
+                    toReturn = (short)(Math.Floor((double)(Score / 2)) - 5);
+                }
+                return toReturn;
+            }
         }
         private short _bonus;
         public short Bonus
@@ -55,6 +75,16 @@ namespace CharacterSheetManager.Models
         {
             set { _temporaryScore = value; }
             get { return _temporaryScore; }
+        }
+
+        public short ClassBonus
+        {
+            get { return _traits.AbilityBonuses.ContainsKey(_class) ? _traits.AbilityBonuses[_class] : (short)0; }
+        }
+
+        public short RaceBonus
+        {
+            get { return _traits.AbilityBonuses.ContainsKey(_race) ? _traits.AbilityBonuses[_race] : (short)0; }
         }
     }
 }

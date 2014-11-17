@@ -11,16 +11,28 @@ namespace CharacterSheetManager.Models
         private readonly string _className = string.Empty;
         private readonly ushort _classLevel;
 
-        private readonly Dictionary<string, ushort> _abilityBonuses;
-        public List<KeyValuePair<string, ushort>> AbilityBonuses
+        private readonly Dictionary<string, short> _abilityBonuses;
+        public Dictionary<string, short> AbilityBonuses
         {
-            get { return _abilityBonuses.ToList(); }
+            get { return _abilityBonuses; }
         }
 
-        private Dictionary<string, ushort> _skillBonuses;
-        public List<KeyValuePair<string, ushort>> SkillBonuses
+        private Dictionary<string, short> _skillBonuses;
+        public Dictionary<string, short> SkillBonuses
         {
-            get { return _skillBonuses.ToList(); }
+            get { return _skillBonuses; }
+        }
+
+        private Dictionary<string,short> _savingThrowBonuses;
+        public Dictionary<string, short> SaveBonuses
+        {
+            get { return _savingThrowBonuses; }
+        }
+
+        private Dictionary<string, bool> _classSkills;
+        public Dictionary<string, bool> ClassSkills
+        {
+            get { return _classSkills; }
         }
 
         private Dictionary<string, string> _racialTraits;
