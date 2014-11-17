@@ -53,6 +53,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Container.cs" />
+    <Compile Include="Models\Feat.cs" />
+    <Compile Include="Models\Spell.cs" />
+    <Compile Include="ViewModels\Description.cs" />
+    <Compile Include="ViewModels\ItemsAndMoney.cs" />
+    <Compile Include="ViewModels\Magic.cs" />
+    <Compile Include="ViewModels\Overview.cs" />
+    <Compile Include="ViewModels\Skills.cs" />
+    <Compile Include="ViewModels\TraitsFeaturesAndFeats.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="ViewModels\WeaponsAndArmor.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -105,9 +116,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
