@@ -1,6 +1,7 @@
-﻿<Window x:Class="CharacterSheetManager.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ViewModels="clr-namespace:CharacterSheetManager.ViewModels" x:Class="CharacterSheetManager.MainWindow"
         Title="MainWindow" Height="451" Width="657">
     <Grid>
         <TabControl>
@@ -10,11 +11,14 @@
                         <ColumnDefinition Width="321*"/>
                         <ColumnDefinition Width="322*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0">test</Button>
-                    <Button Grid.Column="1">test2</Button>
+                    <Button Grid.Column="0" Content="test"/>
+                    <Button Grid.Column="1" Content="test2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Weapons and Armor">
+                <TabItem.DataContext>
+                    <ViewModels:WeaponsAndArmor/>
+                </TabItem.DataContext>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="28"/>
@@ -23,25 +27,22 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Content="Weapons" Grid.Row="0"/>
-                    <ListBox Grid.Row="1">
-                        <ListBoxItem Content="Test1"/>
-                        <ListBoxItem Content="Test2"/>
-                        <ListBoxItem Content="Test1"/>
-                        <ListBoxItem Content="Test2"/>
-                        <ListBoxItem Content="Test1"/>
-                        <ListBoxItem Content="Test2"/>
-                        <ListBoxItem Content="Test1"/>
-                        <ListBoxItem Content="Test2"/>
-                        <ListBoxItem Content="Test1"/>
-                        <ListBoxItem Content="Test2"/>
-                        <ListBoxItem Content="Test1"/>
-                        <ListBoxItem Content="Test2"/>
-                        <ListBoxItem Content="Test1"/>
-                        <ListBoxItem Content="Test2"/>
-                        <ListBoxItem Content="Test1"/>
-                        <ListBoxItem Content="Test2"/>
-                        
-                    </ListBox>
+                    <DataGrid ItemsSource="{Binding Weapons}" Margin="0,10,0,18" Grid.RowSpan="2" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Name}" ClipboardContentBinding="{x:Null}" Header="Name"/>
+                            <DataGridCheckBoxColumn Binding="{Binding Masterwork}" ClipboardContentBinding="{x:Null}" Header="MW"/>
+                            <DataGridTextColumn Binding="{Binding TotalAttack, Mode=OneWay}" ClipboardContentBinding="{x:Null}" Header="Total Attack"/>
+                            <DataGridTextColumn Binding="{Binding DamageRoll}" ClipboardContentBinding="{x:Null}" Header="Damage"/>
+                            <DataGridTextColumn Binding="{Binding Enhancements}" ClipboardContentBinding="{x:Null}" Header="Enhancements"/>
+                            <DataGridTextColumn Binding="{Binding WeaponType}" ClipboardContentBinding="{x:Null}" Header="Weapon Type"/>
+                            <DataGridTextColumn Binding="{Binding MiscellaneousAttackBonus}" ClipboardContentBinding="{x:Null}" Header="Misc. Attack Bonus"/>
+                            <DataGridTextColumn Binding="{Binding EnhancementAttackBonus}" ClipboardContentBinding="{x:Null}" Header="Enhancement Attack Bonus"/>
+                            <DataGridTextColumn Binding="{Binding Quantity}" ClipboardContentBinding="{x:Null}" Header="Quantity"/>
+                            <DataGridTextColumn Binding="{Binding RangeIncrement}" ClipboardContentBinding="{x:Null}" Header="Range Increment"/>
+                            <DataGridTextColumn Binding="{Binding GripType}" ClipboardContentBinding="{x:Null}" Header="Grip Type"/>
+                            <DataGridTextColumn Binding="{Binding TotalWeight, Mode=OneWay}" ClipboardContentBinding="{x:Null}" Header="Total Weight"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Label Content="Armor" Grid.Row="2"/>
                     <ListBox Grid.Row="3">
                         <ListBoxItem Content="Test1"/>
@@ -60,26 +61,21 @@
                         <ListBoxItem Content="Test2"/>
                         <ListBoxItem Content="Test1"/>
                         <ListBoxItem Content="Test2"/>
-                        
+
                     </ListBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Items">
-            </TabItem>
+            <TabItem Header="Items"/>
             <TabItem Header="Magic">
                 <DockPanel>
-                    <Button DockPanel.Dock="Left">test1</Button>
-                    <Button DockPanel.Dock="Top" Height="100">test2</Button>
-                    <Button DockPanel.Dock="Top" Height="200">test3</Button>
-                    <Button>test4</Button>
+                    <Button DockPanel.Dock="Left" Content="test1"/>
+                    <Button DockPanel.Dock="Top" Height="100" Content="test2"/>
+                    <Button DockPanel.Dock="Top" Height="200" Content="test3"/>
+                    <Button Content="test4"/>
                 </DockPanel>
             </TabItem>
-            <TabItem Header="Skills">
-                
-            </TabItem>
-            <TabItem Header="Traits, Features and Feats">
-                
-            </TabItem>
+            <TabItem Header="Skills"/>
+            <TabItem Header="Traits, Features and Feats"/>
         </TabControl>
 
     </Grid>
